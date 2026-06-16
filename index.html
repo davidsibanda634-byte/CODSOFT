@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e40af;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calc {
+      background: #2563eb;
+      border-radius: 20px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .display {
+      background: #eff6ff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: right;
+    }
+
+    .display-expr {
+      font-size: 13px;
+      color: #60a5fa;
+      min-height: 20px;
+      font-family: 'Courier New', monospace;
+      word-break: break-all;
+    }
+
+    .display-main {
+      font-size: 36px;
+      font-weight: 600;
+      color: #1e3a8a;
+      font-family: 'Courier New', monospace;
+      word-break: break-all;
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .key {
+      border: none;
+      border-radius: 10px;
+      height: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      transition: transform 0.08s, filter 0.08s;
+    }
+
+    .key:hover  { filter: brightness(1.2); }
+    .key:active { transform: scale(0.92); }
+
+    .key-num   { background: #1d4ed8; }
+    .key-op    { background: #1e40af; font-size: 22px; }
+    .key-clear { background: #dc2626; }
+    .key-sign  { background: #1e40af; font-size: 14px; }
+    .key-pct   { background: #1e40af; }
+    .key-dec   { background: #1d4ed8; }
+    .key-eq    { background: #0ea5e9; }
+    .key-zero  { grid-column: span 2; }
+  </style>
+</head>
+<body>
+
+  <div class="calc">
+
+    <div class="display">
+      <div class="display-expr" id="expr"></div>
+      <div class="display-main" id="screen">0</div>
+    </div>
+
+    <div class="btn-grid">
+      <button class="key key-clear" onclick="pressClear()">AC</button>
+      <button class="key key-sign"  onclick="pressSign()">+/−</button>
+      <button class="key key-pct"   onclick="pressPercent()">%</button>
+      <button class="key key-op"    onclick="pressOp('/')">÷</button>
+
+      <button class="key key-num"   onclick="pressNum('7')">7</button>
+      <button class="key key-num"   onclick="pressNum('8')">8</button>
+      <button class="key key-num"   onclick="pressNum('9')">9</button>
+      <button class="key key-op"    onclick="pressOp('*')">×</button>
+
+      <button class="key key-num"   onclick="pressNum('4')">4</button>
+      <button class="key key-num"   onclick="pressNum('5')">5</button>
+      <button class="key key-num"   onclick="pressNum('6')">6</button>
+      <button class="key key-op"    onclick="pressOp('-')">−</button>
+
+      <button class="key key-num"   onclick="pressNum('1')">1</button>
+      <button class="key key-num"   onclick="pressNum('2')">2</button>
+      <button class="key key-num"   onclick="pressNum('3')">3</button>
+      <button class="key key-op"    onclick="pressOp('+')">+</button>
+
+      <button class="key key-num key-zero" onclick="pressNum('0')">0</button>
+      <button class="key key-dec"          onclick="pressDot()">.</button>
+      <button class="key key-eq"           onclick="pressEquals()">=</button>
+    </div>
+
+  </div>
+
+  <script>
+    var current  = '0';
+    var stored   = null;
+    var operator = null;
+    var newInput = false;
+
+    var screenEl = document.getElementById('screen');
+    var exprEl   = document.getElementById('expr');
+
+    var symbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+
+    function updateScreen() {
+      if (current === 'Error') {
+        screenEl.textContent = 'Error';
+        return;
+      }
+      var val = current;
+      if (val.length > 12) {
+        val = parseFloat(val).toExponential(4);
+      }
+      screenEl.textContent = val;
+    }
+
+    function pressNum(digit) {
+      if (newInput) {
+        current  = digit;
+        newInput = false;
+      } else {
+        if (current === '0') {
+          current = digit;
+        } else {
+          if (current.length < 12) {
+            current = current + digit;
+          }
+        }
+      }
+      updateScreen();
+    }
+
+    function pressDot() {
+      if (newInput) {
+        current  = '0.';
+        newInput = false;
+        screenEl.textContent = '0.';
+        return;
+      }
+      if (current.indexOf('.') === -1) {
+        current = current + '.';
+        screenEl.textContent = current;
+      }
+    }
+
+    function pressOp(op) {
+      if (stored !== null && !newInput) {
+        current = doCalc();
+        updateScreen();
+      }
+      stored   = current;
+      operator = op;
+      newInput = true;
+      exprEl.textContent = screenEl.textContent + ' ' + symbols[op];
+    }
+
+    function pressEquals() {
+      if (stored === null || operator === null) return;
+      exprEl.textContent = stored + ' ' + symbols[operator] + ' ' + current + ' =';
+      current  = doCalc();
+      stored   = null;
+      operator = null;
+      newInput = true;
+      updateScreen();
+    }
+
+    function doCalc() {
+      var a = parseFloat(stored);
+      var b = parseFloat(current);
+      var result;
+
+      if (operator === '+') result = a + b;
+      if (operator === '-') result = a - b;
+      if (operator === '*') result = a * b;
+      if (operator === '/') {
+        if (b === 0) return 'Error';
+        result = a / b;
+      }
+
+      return parseFloat(result.toFixed(10)).toString();
+    }
+
+    function pressClear() {
+      current  = '0';
+      stored   = null;
+      operator = null;
+      newInput = false;
+      screenEl.textContent = '0';
+      exprEl.textContent   = '';
+    }
+
+    function pressSign() {
+      if (current === 'Error' || current === '0') return;
+      if (current.charAt(0) === '-') {
+        current = current.slice(1);
+      } else {
+        current = '-' + current;
+      }
+      updateScreen();
+    }
+
+    function pressPercent() {
+      if (current === 'Error') return;
+      current = parseFloat((parseFloat(current) / 100).toFixed(10)).toString();
+      updateScreen();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key >= '0' && e.key <= '9') { pressNum(e.key); }
+      else if (e.key === '.')            { pressDot(); }
+      else if (e.key === '+')            { pressOp('+'); }
+      else if (e.key === '-')            { pressOp('-'); }
+      else if (e.key === '*')            { pressOp('*'); }
+      else if (e.key === '/')            { e.preventDefault(); pressOp('/'); }
+      else if (e.key === 'Enter' || e.key === '=') { pressEquals(); }
+      else if (e.key === 'Escape')       { pressClear(); }
+      else if (e.key === 'Backspace') {
+        if (current.length > 1) {
+          current = current.slice(0, -1);
+        } else {
+          current = '0';
+        }
+        updateScreen();
+      }
+    });
+  </script>
+
+</body>
+</html>
