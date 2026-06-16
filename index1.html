@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>David Sibanda - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style1.css"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="brand">
+      Online Portfolio
+      <small>Just another My Blog site</small>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#skills">Skill</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <img class="hero-bg" src="images/profile.jpg" alt="David Sibanda"/>
+    <div class="hero-content">
+      <h1>David Sibanda</h1>
+      <p>Hi, I am an undergraduate student doing Bachelors degree
+         in Computer Application with specialisation in Data Science
+         and Big Data Analytics. I have been gaining hands on
+         experience in different programming languages. I am a full
+         stack developer in MERN stack.</p>
+      <a href="#contact" class="btn-hire">Hire Me</a>
+    </div>
+    <img class="portrait" src="images/profile.jpg" alt="David Sibanda portrait"/>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>About Me</h2>
+      <div class="underline"></div>
+      <p class="lead">I Am a Developer who blends expertise with industry know-how
+        to guide your next property development.</p>
+      <p>I am a MERN Stack Developer passionate about building modern, responsive,
+        and scalable web applications. My technical skills include MongoDB, Express.js,
+        React, Node.js, JavaScript, Java, C, and relational databases. Currently
+        pursuing a BCA in Data Science and Big Data Analytics, I am continuously
+        expanding my knowledge in software development, data analytics, and emerging
+        technologies. I enjoy turning ideas into practical solutions and creating
+        applications that deliver real value.</p>
+      <a href="resume.pdf" download class="btn-resume">Download Resume</a>
+    </div>
+  </section>
+
+  <section class="skills" id="skills">
+    <h2 class="section-heading">My Skills</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-label"><span>HTML &amp; CSS</span><span>90%</span></div>
+        <div class="skill-bar"><div class="fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>JavaScript</span><span>75%</span></div>
+        <div class="skill-bar"><div class="fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>React</span><span>70%</span></div>
+        <div class="skill-bar"><div class="fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>Node.js</span><span>65%</span></div>
+        <div class="skill-bar"><div class="fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>MongoDB</span><span>75%</span></div>
+        <div class="skill-bar"><div class="fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span>Python / Data Science</span><span>60%</span></div>
+        <div class="skill-bar"><div class="fill" style="width:70%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <h2 class="section-heading">Services</h2>
+    <div class="section-divider"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-code"></i>
+        <h3>Web Development</h3>
+        <p>Building modern, responsive full-stack web applications using the MERN stack.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-database"></i>
+        <h3>Data Analytics</h3>
+        <p>Analysing and visualising data using Python, SQL, and Big Data tools.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>App Development</h3>
+        <p>Designing and building cross-platform mobile and web applications.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="works" id="works">
+    <h2 class="section-heading">Works</h2>
+    <div class="section-divider"></div>
+    <div class="works-grid">
+      <div class="work-card">
+        <img src="images/project1.jpg" alt="Project 1"
+             onerror="this.src='https://via.placeholder.com/400x180/3a86ff/ffffff?text=Project+1'"/>
+        <div class="work-overlay">
+          <h3>MERN Web App</h3>
+          <p>A full stack web application built with MongoDB, Express, React and Node.js.</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <img src="images/project2.jpg" alt="Project 2"
+             onerror="this.src='https://via.placeholder.com/400x180/1c1c1c/ffffff?text=Project+2'"/>
+        <div class="work-overlay">
+          <h3>Data Dashboard</h3>
+          <p>A data analytics dashboard built with Python and visualisation libraries.</p>
+        </div>
+      </div>
+      <div class="work-card">
+        <img src="images/project3.jpg" alt="Project 3"
+             onerror="this.src='https://via.placeholder.com/400x180/2d2d2d/ffffff?text=Project+3'"/>
+        <div class="work-overlay">
+          <h3>Portfolio Website</h3>
+          <p>This personal portfolio — designed and coded from scratch using HTML and CSS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="section-heading">Contact Me</h2>
+    <div class="section-divider"></div>
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <p><i class="fas fa-envelope"></i> davidsibanda@gmai.com</p>
+        <p><i class="fas fa-phone"></i> +263 784894538</p>
+        <p><i class="fas fa-map-marker-alt"></i> Zimbabwe</p>
+        <p><i class="fab fa-linkedin"></i> <a href="#">linkedin.com/in/davidsibanda</a></p>
+        <p><i class="fab fa-github"></i> <a href="#">github.com/davidsibanda</a></p>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text"  placeholder="Your Name"    required/>
+        <input type="email" placeholder="Your Email"   required/>
+        <input type="text"  placeholder="Subject"/>
+        <textarea rows="5"  placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+ 
+  <footer class="footer">
+    &copy; 2024 David Sibanda. All rights reserved.
+  </footer>
+
+</body>
+</html>
